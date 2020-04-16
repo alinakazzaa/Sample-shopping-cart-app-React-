@@ -1,0 +1,66 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.app-logo {
+    height: 15vmin;
+    pointer-events: none;
+  }
+
+  .title {
+    font-size: 40px;
+    color: #069cc6;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+}
+
+.subTitle {
+    font-size: 20px;
+    font-weight: 100;
+    color: #069cc6;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+}
+
+.input {
+    width: 200px;
+    height: 28px;
+    border: 1px solid #1414ff23;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #0b4b5b;
+    padding: 5px;
+    margin: 10px 0 10px 0;
+}
+
+.bigBtn {
+    border: 1px solid #069cc6;
+    background-color: #069cc6;
+    font-size: 23px;
+    color: white;
+    margin: 10px 0 10px 0;
+    border-radius: 10px;
+    width: 200px;
+}
+  @media (prefers-reduced-motion: no-preference) {
+    .app-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
