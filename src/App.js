@@ -4,6 +4,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import LogIn from './screens/LogIn'
 import Register from './screens/Register'
 import { createBrowserHistory } from 'history'
+import ItemCatalog from './screens/ItemCatalog'
 const history = createBrowserHistory
 
 class App extends React.Component {
@@ -15,14 +16,13 @@ class App extends React.Component {
         <Router history={history()}>
           <Switch>
             <Route exact path="/">
-              <LogIn history={history}
-              // nextPath={this.nextPath} 
-              />
+              <LogIn history={history} />
             </Route>
             <Route path="/register">
-              <Register history={history}
-              // nextPath={this.nextPath}
-              />
+              <Register history={history} />
+            </Route>
+            <Route path="/catalog">
+              <ItemCatalog history={history} />
             </Route>
           </Switch>
         </Router>

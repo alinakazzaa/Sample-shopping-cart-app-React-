@@ -18,9 +18,10 @@ class Register extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        const { addUser, setCurrentUserSuccess, nextPath } = this.props
+        const { addUser, history } = this.props
         let userValue = { ...this.state }
         addUser(userValue)
+        history().push("/catalog")
     }
 
     handleChange = event => {
@@ -66,7 +67,7 @@ class Register extends React.Component {
                         Confirm password
                             </label>
                     <input className="input" type="text" name="confirm-password" />
-                    <input className="loginBtn" type="submit" value="Register" />
+                    <input className="bigBtn" type="submit" value="Register" />
                 </form>
             </div >
         )

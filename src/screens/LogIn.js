@@ -23,13 +23,16 @@ class LogIn extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        const { user, setCurrentUserSuccess } = this.props
-        let userValue = { ...this.state }
-        let found = user.all_users.find(u => u.username == userValue.username)
+        const { user, setCurrentUserSuccess, history } = this.props
 
-        if (found !== null) {
-            if (userValue.password == found.password)
+        let userValue = { ...this.state }
+        console.log(user.allUsers)
+        const found = user.allUsers.find(u => u.username === userValue.username)
+
+        if (found) {
+            if (userValue.password === found.password)
                 setCurrentUserSuccess(found)
+            history().push("/catalog")
         }
     }
 
@@ -45,6 +48,7 @@ class LogIn extends React.Component {
 
     render() {
         const { history } = this.props
+        // console.log(user.allUsers)
         return (
             < div className="container" >
                 <img src={logo} className="app-logo" alt="logo" />
@@ -58,10 +62,10 @@ class LogIn extends React.Component {
                         Password
                             </label>
                     <input className="input" type="text" name="password" />
-                    <input className="loginBtn" type="submit" value="Log In" />
+                    <input className="bigBtn" type="submit" value="Log In" />
                 </form>
                 <form>
-                    <input className="loginBtn"
+                    <input className="bigBtn"
                         onClick={() => history().push("/register")}
                         type="submit" value="Register" />
                 </form>

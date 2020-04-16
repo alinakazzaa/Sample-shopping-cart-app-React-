@@ -3,14 +3,20 @@ import { SET_USERS_SUCCESS, SET_USERS_ERROR, SET_CURRENT_USER_SUCCESS, SET_CURRE
 const db = firebase.database()
 
 export const addUser = value => {
-    db.ref('/Users').push({
-        ...value
-    })
+    return dispatch => {
 
-    return {
-        type: ADD_USER
+        db.ref('/Users').push({
+            ...value
+        })
+
+        dispatch(setCurrentUserSuccess(value))
+
+        dispatch({
+            type: ADD_USER
+        })
     }
 }
+
 
 export const getAllUsers = () => {
     return dispatch => {
@@ -18,7 +24,7 @@ export const getAllUsers = () => {
 
         db.ref('/Users/').once('value', userSnapshot => {
             userSnapshot.forEach(user => {
-                users.push({ ...user.val().details })
+                users.push({ ...user.val() })
             })
 
             if (users.length == 0) {

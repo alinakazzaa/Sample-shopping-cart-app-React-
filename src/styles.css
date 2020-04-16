@@ -11,7 +11,7 @@
 }
 
 .app-logo {
-    height: 23vmin;
+    height: 15vmin;
     pointer-events: none;
   }
 
@@ -31,23 +31,24 @@
 }
 
 .input {
-    width: 250px;
-    height: 32px;
-    border: 1px solid #f0f0f5;
+    width: 200px;
+    height: 28px;
+    border: 1px solid #1414ff23;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 18px;
     color: #0b4b5b;
     padding: 5px;
     margin: 10px 0 10px 0;
 }
 
-.loginBtn {
+.bigBtn {
     border: 1px solid #069cc6;
     background-color: #069cc6;
-    font-size: 25px;
+    font-size: 23px;
     color: white;
     margin: 10px 0 10px 0;
     border-radius: 10px;
+    width: 200px;
 }
   @media (prefers-reduced-motion: no-preference) {
     .app-logo {
