@@ -1,5 +1,5 @@
 import firebase from '../database/firebase.js'
-import { SET_ITEMS_SUCCESS, SET_ITEMS_ERROR, SET_CURRENT_ITEM_SUCCESS, SET_CURRENT_ITEM_ERROR, CLEAR_CURRENT_ITEM, ADD_ITEM } from '../constants/index.js'
+import { SET_ITEMS_SUCCESS, SET_ITEMS_ERROR, SET_CURRENT_ITEM_SUCCESS, SET_CURRENT_ITEM_ERROR, CLEAR_CURRENT_ITEM, ADD_ITEM, UPDATE_ITEM, REMOVE_ITEM } from '../constants/index.js'
 const db = firebase.database()
 
 export const addItem = value => {
@@ -12,8 +12,6 @@ export const addItem = value => {
                 id: data.key
             })
         })
-
-        dispatch(setCurrentItemSuccess(value))
 
         dispatch({
             type: ADD_ITEM
@@ -77,11 +75,26 @@ export const clearCurrentItem = () => {
 }
 
 export const updateItem = item => {
-    db.ref(`/Items/${item.id}`).update({
-        ...item
-    })
+    return dispatch => {
+        db.ref(`/Items/${item.id}`).update({
+            ...item
+        })
+
+        dispatch({
+            type: UPDATE_ITEM,
+            item
+        })
+    }
 }
 
-export const removeUser = item => {
-    db.ref(`/Items/`).child(item.id).remove()
+export const removeItem = item => {
+    return dispatch => {
+        db.ref(`/Items/`).child(item.id).remove()
+
+        dispatch({
+            type: REMOVE_ITEM,
+            item
+        })
+
+    }
 }
