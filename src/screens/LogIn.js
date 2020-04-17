@@ -5,6 +5,7 @@ import { getAllUsers, setCurrentUserSuccess } from '../actions/user'
 import { connect } from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
+import { LoginForm } from '../components/LoginForm'
 
 class LogIn extends React.Component {
     constructor(props) {
@@ -13,8 +14,7 @@ class LogIn extends React.Component {
             value: {
                 username: '',
                 password: ''
-            },
-            index: 0
+            }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -40,55 +40,32 @@ class LogIn extends React.Component {
     }
 
     handleChange = event => {
-        event.preventDefault();
-        if (event.target.name === "username") {
-            this.setState({ value: { ...this.state.value, username: event.target.value } })
-        } else {
-            this.setState({ value: { ...this.state.value, password: event.target.value } })
-        }
+        event.preventDefault()
+        this.setState({ value: { ...this.state.value, [event.target.name]: event.target.value } })
+
     }
-
-    loginComponent = () => {
-        const { history, user } = this.props
-
-        return <div>
-            <img src={logo} className="app-logo" alt="logo" />
-            {this.state.index == 0 && <p className="title">ItemStore</p>}
-            {this.state.index == 1 && <p className="subTitle">ItemStore</p>}
-            {this.state.index == 1 && <p className="subTitle">Admin Login</p>}
-            <form className="formContainer" onChange={this.handleChange} onSubmit={this.handleSubmit} >
-                <label className="subTitle">
-                    Username
-            </label>
-                <input className="input" type="text" name="username" />
-                <label className="subTitle">
-                    Password
-            </label>
-                <input className="input" type="text" name="password" />
-                <input className="bigBtn" type="submit" value="Log In" />
-            </form>
-            {this.state.index == 0 && <form>
-                <input className="bigBtn"
-                    onClick={() => history().push("/register", { current: user.currentUSer })}
-                    type="submit" value="Register" />
-            </form>}
-        </div>
-    }
-
 
     render() {
+        console.log(this.props)
         return (
             < div className="container" >
-                <Tabs onSelect={index => this.setState({ index })}>
-                    <TabList> <Tab>Customer</Tab>
-                        <Tab>Administrator</Tab></TabList>
-                    <TabPanel>
-                        <h2>{this.loginComponent()}</h2>
-                    </TabPanel>
-                    <TabPanel>
-                        <h2>{this.loginComponent()}</h2>
-                    </TabPanel>
-                </Tabs>
+                <div className="formContainer">
+                    <img src={logo} className="app-logo" alt="logo" />
+                    <Tabs onSelect={index => this.setState({ index })}>
+                        <TabList>
+                            <Tab>Customer</Tab>
+                            <Tab>Administrator</Tab>
+                        </TabList>
+                        <TabPanel>
+                            <LoginForm isAdmin={false} handleChange={this.handleChange}
+                                handleSubmit={this.handleSubmit} history={this.props.history} />
+                        </TabPanel>
+                        <TabPanel forceRender={false}>
+                            <LoginForm isAdmin={true} handleChange={this.handleChange}
+                                handleSubmit={this.handleSubmit} history={this.props.history} />
+                        </TabPanel>
+                    </Tabs>
+                </div>
             </div >
         )
     }
