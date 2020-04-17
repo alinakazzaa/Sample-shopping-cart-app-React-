@@ -1,4 +1,4 @@
-import { CLEAR_CURRENT_ITEM, SET_CURRENT_ITEM_SUCCESS, SET_CURRENT_ITEM_ERROR, SET_ITEMS_PENDING, SET_ITEMS_SUCCESS, SET_ITEMS_ERROR, UPDATE_ITEM } from '../constants'
+import { CLEAR_CURRENT_ITEM, SET_CURRENT_ITEM_SUCCESS, SET_CURRENT_ITEM_ERROR, SET_ITEMS_PENDING, SET_ITEMS_SUCCESS, SET_ITEMS_ERROR, UPDATE_ITEM, REMOVE_ITEM } from '../constants'
 
 const initialState = {
     pending: null,
@@ -8,6 +8,7 @@ const initialState = {
 }
 
 const itemReducer = (state = initialState, action) => {
+    let items = [...state.allItems]
     switch (action.type) {
 
         case SET_CURRENT_ITEM_SUCCESS:
@@ -54,10 +55,25 @@ const itemReducer = (state = initialState, action) => {
             }
 
         case UPDATE_ITEM:
+            const index = items.findIndex(item => item.id == action.item.id)
+            items.splice(index, 1, action.item)
+            let current = { ...state.currentItem }
+
+            if (action.item.id === state.currentItem.id) {
+                current = { ...action.item }
+            }
 
             return {
                 ...state,
-                currentItem: { ...action.item }
+                allItems: [...items],
+                currentItem: current
+            }
+
+        case REMOVE_ITEM:
+
+            return {
+                ...state,
+                allItems: [...state.allItems.filter(item => item.id !== action.item.id)]
             }
         default:
             return state
