@@ -15,14 +15,14 @@ class App extends React.Component {
       <div>
         <Router history={history()}>
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/" component={LogIn}>
               <LogIn history={history} />
             </Route>
             <Route path="/register">
-              <Register history={history} />
+              <Register history={history} component={Register} />
             </Route>
             <Route path="/catalog">
-              <ItemCatalog history={history} />
+              <ItemCatalog history={history} component={ItemCatalog} />
             </Route>
           </Switch>
         </Router>
