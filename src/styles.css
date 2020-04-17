@@ -1,14 +1,16 @@
 .container {
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: '100%';
     flex-direction: column;
   }
 
+  .mainBox {
+    display: flex;
+    flex-direction: row;
+  }
+
   .centered {
     display: flex;
-    flex: 1;
     justify-content: center;
     align-content: center;
     align-items: center;
@@ -18,11 +20,44 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    justify-content: center;
 }
 
 .itemsContainer{
   display: flex;
   flex-direction: column;
+}
+
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #1414ff23;
+  border-radius: 20px;
+  padding: 30px;
+  margin: 20px 0 20px 0;
+  width: 500px;
+}
+
+.itemBody {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  border-top: 1px solid #1414ff23;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #1414ff23;
+  min-height: 50px;
+  padding: 10px 0 10px 0;
 }
 
 .top {
@@ -36,14 +71,8 @@
   display: flex;
   padding: 20px;
   margin: 0;
-}
-
-ol {
-
-}
-
-li {
-
+  align-items: center;
+  justify-content: center;
 }
 
 .app-logo {
@@ -58,12 +87,23 @@ li {
     text-transform: uppercase;
 }
 
+.titleDark {
+  font-size: 40px;
+  color: #001d49;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-transform: uppercase;
+}
+
 .subTitle {
     font-size: 20px;
     font-weight: 100;
     color: #069cc6;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-transform: uppercase;
+}
+
+.lblDiv {
+  margin-right: 10px;
 }
 
 .blueText {
@@ -82,7 +122,7 @@ li {
 
 .input {
     width: 200px;
-    height: 28px;
+    height: 25px;
     border: 1px solid #1414ff23;
     border-radius: 10px;
     font-size: 18px;
@@ -106,6 +146,69 @@ li {
     color: white;
     margin: 10px 0 10px 0;
     border-radius: 50px;
+}
+
+.selectBtn {
+  border: 1px solid #1414ff23;
+  border-radius: 50px;
+  width: 200px;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.image {
+  margin: 20px 0 20px 0;
+  max-width: 200px;
+  max-height: 250px;
+}
+
+.imageSmall {
+  margin: 20px 0 20px 0;
+  max-width: 150px;
+  max-height: 170px;
+}
+
+.btn {
+  display: flex;
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  border: none;
+  font-size: 50px;
+  justify-content: center;
+}
+
+.iconImg {
+  height: 30px;
+  width: 30px;
+}
+
+.itemBottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.itemTitle {
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30px;
+  color: #001d49;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-transform: uppercase;
 }
 
   @media (prefers-reduced-motion: no-preference) {
