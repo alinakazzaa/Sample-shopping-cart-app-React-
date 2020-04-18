@@ -8,11 +8,19 @@
   .mainBox {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .rightBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
   }
 
   .centered {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-content: center;
     align-items: center;
   }
@@ -20,8 +28,30 @@
 .formContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.centeredForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.itemForm {
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 20px;
 }
 
 .itemsContainer{
@@ -132,6 +162,26 @@
     color: #0b4b5b;
     padding: 5px;
     margin: 10px 0 10px 0;
+}
+
+.inputSmall {
+  height: 25px;
+  border: 1px solid #1414ff23;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #0b4b5b;
+  padding: 5px;
+  margin: 10px 0 10px 0;
+}
+
+.ratingComment {
+  width: 250px;
+  border: 1px solid #1414ff23;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #0b4b5b;
+  padding: 5px;
+  margin: 10px 0 10px 0;
 }
 
 .bigBtn {
@@ -255,7 +305,6 @@
 .basketActions {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .topRight {
@@ -267,6 +316,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.ratingBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
   @media (prefers-reduced-motion: no-preference) {
