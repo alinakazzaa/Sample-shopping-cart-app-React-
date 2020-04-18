@@ -2,10 +2,9 @@ import React from 'react'
 import { ImagePicker } from 'react-file-picker'
 import { categories } from '../constants/categories'
 
-export const ItemForm = ({ logo, value, onSelectChange, handleChange, handleSubmit, onChangeImage }) => {
+export const ItemForm = ({ value, onSelectChange, handleChange, handleSubmit, onChangeImage }) => {
 
     return <div className="mainBox">
-        <img src={logo} className="app-logo" alt="logo" />
         <div className="centered">
             <div className="imageBox">
                 <p className="subTitle">Image</p>
@@ -38,6 +37,10 @@ export const ItemForm = ({ logo, value, onSelectChange, handleChange, handleSubm
                     Price
             </label>
                 <input value={value.price || null} className="input" type="text" name="price" />
+                <label className="subTitle">
+                    Weight
+            </label>
+                <input value={value.price || null} className="input" type="text" name="weight" />
                 <label className="subTitle">
                     Category
             </label>
