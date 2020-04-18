@@ -43,7 +43,8 @@ class BasketView extends React.Component {
     }
 
     completePurchase = () => {
-
+        const { history } = this.props
+        history().push("/order")
     }
 
     render() {
@@ -58,13 +59,14 @@ class BasketView extends React.Component {
                 </Header>
                 <div className="basketList">
                     {basket.basketItems.length == 0 ? <div style={{ marginTop: 230 }}><p className="subTitle">No Items in Basket</p></div> :
-                        basket.basketItems.map(item => {
-                            return <BasketItem item={item} goToItem={this.goToItem}
+                        basket.basketItems.map((item, index) => {
+                            return <BasketItem key={index} item={item} goToItem={this.goToItem}
                                 removeFromBasket={this.removeFromBasket} updateQuantity={this.updateQuantity} />
                         })
                     }
                 </div >
-                <div className="formContainer"><input className="bigBtn" type="submit" value="Buy" onClick={this.completePurchase} /> </div>
+                <div className="centered"><p className="title">Total $ {basket.basketTotal}</p></div>
+                {basket.basketItems.length > 0 && <div className="centered"><input className="bigBtn" type="submit" value="Buy" onClick={this.completePurchase} /> </div>}
             </div >)
     }
 }
