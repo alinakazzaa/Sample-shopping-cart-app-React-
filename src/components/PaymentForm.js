@@ -2,7 +2,6 @@ import React from 'react'
 
 
 export const PaymentForm = ({ value, onSelectChange, handleChange }) => {
-    console.log(value)
     const months = () => {
         const list = []
 
