@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import userReducer from '../reducers/userReducer'
 import itemReducer from '../reducers/itemReducer'
+import basketReducer from '../reducers/basketReducer'
 import { loadState, saveState } from './localStorage'
 
 const persistedState = loadState()
@@ -9,7 +10,8 @@ const persistedState = loadState()
 const rootReducer = combineReducers(
     {
         user: userReducer,
-        item: itemReducer
+        item: itemReducer,
+        basket: basketReducer
     },
 )
 
@@ -19,7 +21,8 @@ const configureStore = () => {
     store.subscribe(() => {
         saveState({
             user: store.getState().user,
-            item: store.getState().item
+            item: store.getState().item,
+            basket: store.getState().basket
         })
     })
 
