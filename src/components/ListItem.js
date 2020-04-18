@@ -15,7 +15,7 @@ export const ListItem = ({ item, goToItem, removeItem, isAdmin }) => {
                 <p className="subTitle"> by {item.manufacturer}</p>
             </div>
             <div className="imageBox">
-                <img className="imageSmall" src={item.image} />
+                <img className="imageMedium" src={item.image} />
             </div>
         </div>
         <div className="itemBottom">
