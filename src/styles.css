@@ -22,7 +22,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    justify-content: center;
 }
 
 .itemsContainer{
@@ -67,7 +66,7 @@
   padding: 20px;
   width: 700px;
   align-self: center;
-  justify-content: space-between;;
+  justify-content: space-between;
 }
 
 .middle {
@@ -178,10 +177,16 @@
   max-height: 250px;
 }
 
-.imageSmall {
+.imageMedium {
   margin: 20px 0 20px 0;
   max-width: 150px;
   max-height: 170px;
+}
+
+.imageSmall {
+  margin: 10px 0 10px 0;
+  max-width: 90px;
+  max-height: 110px;
 }
 
 .btn {
@@ -245,6 +250,23 @@
   height: 50px;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.basketActions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.topRight {
+  display: flex;
+  flex-direction: row;
+}
+
+.basketList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
   @media (prefers-reduced-motion: no-preference) {
