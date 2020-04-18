@@ -22,8 +22,8 @@ export const BasketItem = ({ item, goToItem, removeFromBasket, updateQuantity })
             <p className="blueText">$ {item.price}</p>
             <select name="basketQuantity" className="input" value={item.basketQuantity}
                 onChange={selected => updateQuantity(item, selected.target.value)}>
-                {quantities.map(quantity => {
-                    return <option value={quantity}>{quantity}</option>
+                {quantities.map((quantity, index) => {
+                    return <option key={index} value={quantity}>{quantity}</option>
                 })}
             </select>
         </div>
