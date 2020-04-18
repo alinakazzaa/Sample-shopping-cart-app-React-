@@ -1,6 +1,5 @@
 import React from 'react'
 import logo from '../logo.svg'
-import '../styles.css'
 import { addUser, setCurrentUserSuccess } from '../actions/user'
 import { connect } from 'react-redux'
 
@@ -26,17 +25,7 @@ class Register extends React.Component {
 
     handleChange = event => {
         event.preventDefault();
-        if (event.target.name === "username") {
-            this.setState({ username: event.target.value })
-        } else if (event.target.name === "password") {
-            this.setState({ password: event.target.value })
-        } else if (event.target.name === "email") {
-            this.setState({ email: event.target.value })
-        } else if (event.target.name === "confirm-password") {
-            this.setState({ confirmPassword: event.target.value })
-        } else {
-            this.setState({ fullName: event.target.value })
-        }
+        this.setState({ [event.target.name]: event.target.value })
     }
 
 

@@ -1,15 +1,19 @@
 import React from 'react'
 import logo from '../logo.svg'
-import '../styles.css'
 import { getAllUsers, setCurrentUserSuccess } from '../actions/user'
 import { connect } from 'react-redux'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
+import { LoginForm } from '../components/LoginForm'
 
 class LogIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: ''
+            value: {
+                username: '',
+                password: ''
+            }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -24,51 +28,43 @@ class LogIn extends React.Component {
     handleSubmit = event => {
         event.preventDefault()
         const { user, setCurrentUserSuccess, history } = this.props
-
-        let userValue = { ...this.state }
-        console.log(user.allUsers)
-        const found = user.allUsers.find(u => u.username === userValue.username)
+        const found = user.allUsers.find(u => u.username === this.state.value.username)
 
         if (found) {
-            if (userValue.password === found.password)
+            if (this.state.value.password === found.password) {
                 setCurrentUserSuccess(found)
-            history().push("/catalog")
+                history().push("/catalog")
+            }
         }
     }
 
     handleChange = event => {
-        event.preventDefault();
-        if (event.target.name === "username") {
-            this.setState({ username: event.target.value })
-        } else {
-            this.setState({ password: event.target.value })
-        }
+        event.preventDefault()
+        this.setState({ value: { ...this.state.value, [event.target.name]: event.target.value } })
+
     }
 
-
     render() {
-        const { history } = this.props
-        // console.log(user.allUsers)
+        console.log(this.props)
         return (
             < div className="container" >
-                <img src={logo} className="app-logo" alt="logo" />
-                <p className="title">ItemStore</p>
-                <form className="formContainer" onChange={this.handleChange} onSubmit={this.handleSubmit} >
-                    <label className="subTitle">
-                        Username
-                            </label>
-                    <input className="input" type="text" name="username" />
-                    <label className="subTitle">
-                        Password
-                            </label>
-                    <input className="input" type="text" name="password" />
-                    <input className="bigBtn" type="submit" value="Log In" />
-                </form>
-                <form>
-                    <input className="bigBtn"
-                        onClick={() => history().push("/register")}
-                        type="submit" value="Register" />
-                </form>
+                <div className="formContainer">
+                    <img src={logo} className="app-logo" alt="logo" />
+                    <Tabs onSelect={index => this.setState({ index })}>
+                        <TabList>
+                            <Tab>Customer</Tab>
+                            <Tab>Administrator</Tab>
+                        </TabList>
+                        <TabPanel>
+                            <LoginForm isAdmin={false} handleChange={this.handleChange}
+                                handleSubmit={this.handleSubmit} history={this.props.history} />
+                        </TabPanel>
+                        <TabPanel forceRender={false}>
+                            <LoginForm isAdmin={true} handleChange={this.handleChange}
+                                handleSubmit={this.handleSubmit} history={this.props.history} />
+                        </TabPanel>
+                    </Tabs>
+                </div>
             </div >
         )
     }
