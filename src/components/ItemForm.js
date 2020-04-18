@@ -40,7 +40,11 @@ export const ItemForm = ({ value, onSelectChange, handleChange, handleSubmit, on
                 <label className="subTitle">
                     Weight
             </label>
-                <input value={value.price || null} className="input" type="text" name="weight" />
+                <input value={value.weight || null} className="input" type="text" name="weight" />
+                <label className="subTitle">
+                    Quantity in Stock
+            </label>
+                <input value={value.quantity || null} className="input" type="text" name="quantity" />
                 <label className="subTitle">
                     Category
             </label>

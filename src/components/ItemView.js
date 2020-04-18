@@ -26,6 +26,14 @@ export const ItemView = ({ value }) => {
             </label>
                 <p className="blackText">{value.price || null}</p>
                 <label className="subTitle">
+                    Weight
+            </label>
+                <p className="blackText">{value.weight || null}</p>
+                <label className="subTitle">
+                    Quantity in Stock
+            </label>
+                <p className="blackText">{value.quantity || null}</p>
+                <label className="subTitle">
                     Category
             </label>
                 <p className="blackText">{value.category}</p>
