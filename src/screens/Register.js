@@ -37,29 +37,31 @@ class Register extends React.Component {
                 <Header isCustomer={null} history={history}>
                 </Header>
                 <p className="title">ItemStore</p>
-                <form className="formContainer" onChange={this.handleChange} onSubmit={this.handleSubmit} >
-                    <label className="subTitle">
-                        Email
+                <div className="centered">
+                    <form className="formContainer" onChange={this.handleChange} onSubmit={this.handleSubmit} >
+                        <label className="subTitle">
+                            Email
                             </label>
-                    <input className="input" type="text" name="email" />
-                    <label className="subTitle">
-                        Full name
+                        <input className="input" type="text" name="email" />
+                        <label className="subTitle">
+                            Full name
                             </label>
-                    <input className="input" type="text" name="full-name" />
-                    <label className="subTitle">
-                        Username
+                        <input className="input" type="text" name="fullName" />
+                        <label className="subTitle">
+                            Username
                             </label>
-                    <input className="input" type="text" name="username" />
-                    <label className="subTitle">
-                        Password
+                        <input className="input" type="text" name="username" />
+                        <label className="subTitle">
+                            Password
                             </label>
-                    <input className="input" type="text" name="password" />
-                    <label className="subTitle">
-                        Confirm password
+                        <input className="input" type="text" name="password" />
+                        <label className="subTitle">
+                            Confirm password
                             </label>
-                    <input className="input" type="text" name="confirm-password" />
-                    <input className="bigBtn" type="submit" value="Register" />
-                </form>
+                        <input className="input" type="text" name="confirmPassword" />
+                        <input className="bigBtn" type="submit" value="Register" />
+                    </form>
+                </div>
             </div >
         )
     }
