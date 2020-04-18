@@ -4,15 +4,18 @@ import '../styles.css'
 import { connect } from 'react-redux'
 import 'react-tabs/style/react-tabs.css'
 import { updateItem } from '../actions/item'
+import { addItemToBasket, updateBasketItem } from '../actions/basket'
 import { ItemForm } from '../components/ItemForm'
 import { ItemView } from '../components/ItemView'
+import Header from '../components/Header'
 
 class ViewItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             value: {
-                category: 'beauty'
+                category: 'beauty',
+                basketQuantity: 1
             },
             editing: false
         }
@@ -48,24 +51,41 @@ class ViewItem extends React.Component {
         this.setState({ value: { ...this.state.value, image } })
     }
 
+    addToBasket = item => {
+        const { addItemToBasket, updateBasketItem, basket } = this.props
+        if (!basket.basketItems.find(item => item.id == item.id))
+            addItemToBasket(item)
+        else
+            updateBasketItem(item)
+    }
+
 
     render() {
-        const { user } = this.props
+        const { user, history } = this.props
         return (
             < div className="container" >
-                <div className="pageHeader">
-                    <img src={logo} className="app-logo" alt="logo" />
+                <Header isCustomer={!user.currentUser.admin} history={history}>
                     {!this.state.editing && user.currentUser.admin && < input className="bigBtn"
                         onClick={() => this.setState({ editing: true })} type="submit" value="Edit" />}
-                </div>
+                </Header>
                 <div className="centered">
                     {this.state.editing ? <ItemForm value={this.state.value}
                         onSelectChange={this.onSelectChange}
                         handleSubmit={this.handleSubmit}
                         handleChange={this.handleChange}
                         onChangeImage={this.onChangeImage} />
-                        : <ItemView value={this.state.value} />}
-                </div>}
+                        : <ItemView
+                            value={this.state.value}
+                            addToBasket={this.addToBasket}
+                            isCustomer={!user.currentUser.admin}
+                            setBasketQuantity={quantity => this.setState({
+                                value: {
+                                    ...this.state.value,
+                                    basketQuantity: quantity
+                                }
+                            })}
+                        />}
+                </div>
 
             </div >
         )
@@ -74,11 +94,14 @@ class ViewItem extends React.Component {
 
 const mapStateToProps = state => ({
     item: state.item,
-    user: state.user
+    user: state.user,
+    basket: state.basket
 })
 
 const mapDispatchToProps = {
-    updateItem
+    updateItem,
+    addItemToBasket,
+    updateBasketItem
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewItem)
