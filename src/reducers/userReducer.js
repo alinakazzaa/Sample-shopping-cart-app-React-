@@ -1,4 +1,4 @@
-import { CLEAR_CURRENT_USER, SET_CURRENT_USER_SUCCESS, SET_CURRENT_USER_ERROR, SET_USERS_PENDING, SET_USERS_SUCCESS, SET_USERS_ERROR, UPDATE_USER } from '../constants'
+import { CLEAR_CURRENT_USER, SET_CURRENT_USER_SUCCESS, SET_CURRENT_USER_ERROR, SET_USERS_PENDING, SET_USERS_SUCCESS, SET_USERS_ERROR, UPDATE_USER, CLEAR_USER_STATE } from '../constants'
 
 const initialState = {
     pending: null,
@@ -58,6 +58,12 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser: { ...action.user }
+            }
+
+        case CLEAR_USER_STATE:
+
+            return {
+                ...initialState
             }
         default:
             return state
