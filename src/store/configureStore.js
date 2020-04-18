@@ -3,6 +3,7 @@ import thunk from 'redux-thunk'
 import userReducer from '../reducers/userReducer'
 import itemReducer from '../reducers/itemReducer'
 import basketReducer from '../reducers/basketReducer'
+import orderReducer from '../reducers/orderReducer'
 import { loadState, saveState } from './localStorage'
 
 const persistedState = loadState()
@@ -11,7 +12,8 @@ const rootReducer = combineReducers(
     {
         user: userReducer,
         item: itemReducer,
-        basket: basketReducer
+        basket: basketReducer,
+        order: orderReducer
     }
 )
 
@@ -22,7 +24,8 @@ const configureStore = () => {
         saveState({
             user: store.getState().user,
             item: store.getState().item,
-            basket: store.getState().basket
+            basket: store.getState().basket,
+            order: store.getState().order
 
         })
     })
