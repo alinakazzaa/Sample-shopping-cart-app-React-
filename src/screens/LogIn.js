@@ -1,6 +1,5 @@
 import React from 'react'
 import logo from '../logo.svg'
-import '../styles.css'
 import { getAllUsers, setCurrentUserSuccess } from '../actions/user'
 import { connect } from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'

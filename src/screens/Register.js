@@ -1,6 +1,5 @@
 import React from 'react'
 import logo from '../logo.svg'
-import '../styles.css'
 import { addUser, setCurrentUserSuccess } from '../actions/user'
 import { connect } from 'react-redux'
 
