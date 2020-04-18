@@ -72,7 +72,7 @@
   padding: 20px;
   margin: 0;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
 }
 
 .app-logo {
@@ -100,6 +100,7 @@
     color: #069cc6;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-transform: uppercase;
+    margin: 0;
 }
 
 .lblDiv {
@@ -182,12 +183,11 @@
 
 .btn {
   display: flex;
-  height: 50px;
-  width: 50px;
   background-color: transparent;
   border: none;
-  font-size: 50px;
+  font-size: 20px;
   justify-content: center;
+  padding: 0;
 }
 
 .iconImg {
@@ -209,6 +209,26 @@
   color: #001d49;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-transform: uppercase;
+}
+
+.sorters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.sortView {
+  display: flex;
+  flex-direction: row;
+}
+
+.arrowIcon {
+  height: 20px;
+}
+
+.arrowIconInactive {
+  height: 20px;
+  opacity: 0.3;
 }
 
   @media (prefers-reduced-motion: no-preference) {
