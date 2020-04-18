@@ -2,7 +2,8 @@ import React from 'react'
 import { ImagePicker } from 'react-file-picker'
 import { categories } from '../constants/categories'
 
-export const ItemForm = ({ value, onSelectChange, handleChange, handleSubmit, onChangeImage }) => {
+export const ItemForm = ({ value, onSelectChange,
+    handleChange, handleSubmit, onChangeImage }) => {
 
     return <div className="mainBox">
         <div className="centered">
