@@ -55,7 +55,7 @@ const itemReducer = (state = initialState, action) => {
             }
 
         case UPDATE_ITEM:
-            const index = items.findIndex(item => item.id == action.item.id)
+            const index = items.findIndex(item => item.id === action.item.id)
             items.splice(index, 1, action.item)
             let current = { ...state.currentItem }
 

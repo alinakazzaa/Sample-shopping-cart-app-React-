@@ -2,6 +2,7 @@ import React from 'react'
 import logo from '../logo.svg'
 import { addUser, setCurrentUserSuccess } from '../actions/user'
 import { connect } from 'react-redux'
+import Header from '../components/Header'
 
 class Register extends React.Component {
     constructor(props) {
@@ -30,10 +31,11 @@ class Register extends React.Component {
 
 
     render() {
-
+        const { history } = this.props
         return (
             < div className="container" >
-                <img src={logo} className="app-logo" alt="logo" />
+                <Header isCustomer={null} history={history}>
+                </Header>
                 <p className="title">ItemStore</p>
                 <form className="formContainer" onChange={this.handleChange} onSubmit={this.handleSubmit} >
                     <label className="subTitle">
