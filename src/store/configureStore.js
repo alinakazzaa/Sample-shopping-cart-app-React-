@@ -12,7 +12,7 @@ const rootReducer = combineReducers(
         user: userReducer,
         item: itemReducer,
         basket: basketReducer
-    },
+    }
 )
 
 const configureStore = () => {
@@ -23,6 +23,7 @@ const configureStore = () => {
             user: store.getState().user,
             item: store.getState().item,
             basket: store.getState().basket
+
         })
     })
 

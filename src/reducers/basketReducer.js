@@ -5,25 +5,29 @@ const initialState = {
 }
 
 const basketReducer = (state = initialState, action) => {
-    let items = [...state.allItems]
+
+    let items
+
     switch (action.type) {
 
         case ADD_ITEM_TO_BASKET:
+            items = [...state.basketItems]
             items.splice(items.length, 1, action.item)
 
             return {
                 ...state,
-                basketItems: items
+                basketItems: [...items]
             }
 
 
         case UPDATE_ITEM_IN_BASKET:
-            const index = items.findIndex(item => item.id == action.item.id)
+            items = [...state.basketItems]
+            const index = items.findIndex(item => item.id === action.item.id)
             items.splice(index, 1, action.item)
 
             return {
                 ...state,
-                basketItems: items
+                basketItems: [...items]
             }
 
         case REMOVE_ITEM_FROM_BASKET:
