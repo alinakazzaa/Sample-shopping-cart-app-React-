@@ -54,10 +54,10 @@ class ItemCatalog extends React.Component {
 
         if (value == true) {
             items = [...this.state.items.sort((a, b) => {
-                let x = name == "title" && a.title.toLowerCase() ||
+                x = name == "title" && a.title.toLowerCase() ||
                     name == "manufacturer" && a.manufacturer.toLowerCase() ||
                     name == "category" && a.category.toLowerCase()
-                let y = name == "title" && b.title.toLowerCase() ||
+                y = name == "title" && b.title.toLowerCase() ||
                     name == "manufacturer" && b.manufacturer.toLowerCase() ||
                     name == "category" && b.category.toLowerCase()
                 if (x < y) { return -1 }
@@ -66,10 +66,10 @@ class ItemCatalog extends React.Component {
             })]
         } else {
             items = [...this.state.items.sort((a, b) => {
-                var x = name == "title" && a.title.toLowerCase() ||
+                x = name == "title" && a.title.toLowerCase() ||
                     name == "manufacturer" && a.manufacturer.toLowerCase() ||
                     name == "category" && a.category.toLowerCase()
-                var y = name == "title" && b.title.toLowerCase() ||
+                y = name == "title" && b.title.toLowerCase() ||
                     name == "manufacturer" && b.manufacturer.toLowerCase() ||
                     name == "category" && b.category.toLowerCase()
                 if (x < y) { return 1 }
