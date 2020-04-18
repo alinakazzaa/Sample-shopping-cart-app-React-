@@ -50,7 +50,7 @@ class LogIn extends React.Component {
             < div className="container" >
                 <Header isCustomer={null} history={history}>
                 </Header>
-                <div className="formContainer">
+                <div className="centered">
                     <Tabs onSelect={index => this.setState({ index })}>
                         <TabList>
                             <Tab>Customer</Tab>
