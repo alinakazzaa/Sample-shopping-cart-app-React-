@@ -1,24 +1,30 @@
 import React from 'react'
 import logo from '../logo.svg'
-import '../styles.css'
 import { getAllItems, setCurrentItemSuccess, removeItem } from '../actions/item'
 import { connect } from 'react-redux'
 import { ListItem } from '../components/ListItem'
+import { SortingView } from '../components/SortingView'
 
 
 class ItemCatalog extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isSearch: false,
-            searched: []
+            items: [],
+            sorters: {
+                title: { asc: null },
+                category: { asc: null },
+                manufacturer: { asc: null },
+            }
         }
         this.handleChange = this.handleChange.bind(this)
     }
 
     componentDidMount() {
-        const { getAllItems } = this.props
+        const { getAllItems, item } = this.props
         getAllItems()
+        if (!item.error)
+            this.setState({ items: item.allItems })
     }
 
     handleChange = event => {
@@ -31,7 +37,7 @@ class ItemCatalog extends React.Component {
                 item.category.toLowerCase().includes(value.toLowerCase())
         })]
 
-        this.setState({ searched: filteredItems, isSearch: true })
+        this.setState({ items: filteredItems })
     }
 
     goToItem = item => {
@@ -40,11 +46,47 @@ class ItemCatalog extends React.Component {
         history().push(`/viewItem/${item.id}`)
     }
 
+    setSortOrder = (name, value) => {
+        let items
+        let x, y
+
+        if (value == true) {
+            items = [...this.state.items.sort((a, b) => {
+                let x = name == "title" && a.title.toLowerCase() ||
+                    name == "manufacturer" && a.manufacturer.toLowerCase() ||
+                    name == "category" && a.category.toLowerCase()
+                let y = name == "title" && b.title.toLowerCase() ||
+                    name == "manufacturer" && b.manufacturer.toLowerCase() ||
+                    name == "category" && b.category.toLowerCase()
+                if (x < y) { return -1 }
+                if (x > y) { return 1 }
+                return 0;
+            })]
+        } else {
+            items = [...this.state.items.sort((a, b) => {
+                var x = name == "title" && a.title.toLowerCase() ||
+                    name == "manufacturer" && a.manufacturer.toLowerCase() ||
+                    name == "category" && a.category.toLowerCase()
+                var y = name == "title" && b.title.toLowerCase() ||
+                    name == "manufacturer" && b.manufacturer.toLowerCase() ||
+                    name == "category" && b.category.toLowerCase()
+                if (x < y) { return 1 }
+                if (x > y) { return -1 }
+                return 0;
+            })]
+        }
+
+        this.setState({
+            ...this.state,
+            sorters: { ...this.state.sorters, [name]: { asc: value } },
+            items
+        })
+    }
+
     render() {
-        const { isSearch, searched } = this.state
-        const { history, item, user, match } = this.props
-        const items = isSearch ? searched : item.allItems
-        console.log(match)
+        const { sorters, items } = this.state
+        const { history, item, user } = this.props
+
         return (
             < div className="container" >
                 <img src={logo} className="app-logo" alt="logo" />
@@ -58,10 +100,24 @@ class ItemCatalog extends React.Component {
                             onClick={() => history().push('/addItem')}>Add Item</button>}
                     </div>
                     <div className="middle">
+                        <div className="sorters">
+                            <SortingView setSortOrder={this.setSortOrder} asc={sorters.title.asc} name="title" />
+                            <SortingView setSortOrder={this.setSortOrder} asc={sorters.category.asc} name="category" />
+                            <SortingView setSortOrder={this.setSortOrder} asc={sorters.manufacturer.asc} name="manufacturer" />
+                            <button onClick={() =>
+                                this.setState({
+                                    items: [...item.allItems], sorters:
+                                    {
+                                        title: { asc: null },
+                                        category: { asc: null },
+                                        manufacturer: { asc: null },
+                                    }
+                                })} className="btn">Clear Filters</button>
+                        </div>
                         {item.allItems.length == 0 && <div className="centered"><p className="blueText">No Items yet</p></div>}
                         {items.length > 0 &&
                             < div className="itemsList">
-                                {item.allItems.map((item, index) => {
+                                {items.map((item, index) => {
                                     return <ListItem key={index} isAdmin={user.currentUser.admin} removeItem={this.props.removeItem} item={item} index={index} goToItem={this.goToItem} />
                                 })}
                             </div>}
