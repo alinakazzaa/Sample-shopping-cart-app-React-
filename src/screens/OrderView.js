@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Header from '../components/Header'
 import { updateUser } from '../actions/user'
 import { addOrder } from '../actions/order'
+import { updateItem } from '../actions/item'
 import { PaymentForm } from '../components/PaymentForm'
 import { AddressForm } from '../components/AddressForm'
 import { DialogModal } from '../components/DialogModal'
@@ -30,8 +31,9 @@ class OrderView extends React.Component {
 
     handleSubmit = () => {
         const { payment, address, saveAddress, savePayment } = this.state
-        const { user, basket, addOrder } = this.props
+        const { user, basket, addOrder, updateItem } = this.props
         const currect = user.currentUser
+
         let newOrder = {
             items: [...basket.basketItems.map(item => { return item.id })],
             customerID: currect.id,
@@ -45,6 +47,12 @@ class OrderView extends React.Component {
         if (saveAddress) {
             updateUser({ ...user.currentUser, address })
         }
+
+        basket.basketItems.map(item => {
+            updateItem({ ...item, quantity: Number(item.quantity) - Number(item.basketQuantity), basketQuantity: null })
+        })
+
+
 
         addOrder(newOrder, user.currentUser)
         this.setState({ dialogClosed: false })
@@ -113,7 +121,8 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = {
-    addOrder
+    addOrder,
+    updateItem
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderView)
