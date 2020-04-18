@@ -28,7 +28,7 @@ class ViewItem extends React.Component {
 
     componentDidMount() {
         const { item } = this.props
-        this.setState({ value: item.currentItem })
+        this.setState({ value: { ...this.state.value, ...item.currentItem } })
     }
 
     handleSubmit = event => {
@@ -53,34 +53,46 @@ class ViewItem extends React.Component {
 
     addToBasket = item => {
         const { addItemToBasket, updateBasketItem, basket } = this.props
-        if (!basket.basketItems.find(item => item.id == item.id))
+
+        if (basket.basketItems.find(found => found.id === item.id) === undefined) {
             addItemToBasket(item)
-        else
+        } else {
             updateBasketItem(item)
+        }
+    }
+
+    addItemRating = rating => {
+        const { updateItem, item } = this.props
+        const ratings = [...item.currentItem.ratings] || []
+        ratings.push(rating)
+        updateItem({ ...item.currentItem, ratings })
     }
 
 
     render() {
+        const { value, editing } = this.state
         const { user, history } = this.props
+        console.log(value)
         return (
             < div className="container" >
                 <Header isCustomer={!user.currentUser.admin} history={history}>
-                    {!this.state.editing && user.currentUser.admin && < input className="bigBtn"
+                    {!editing && user.currentUser.admin && < input className="bigBtn"
                         onClick={() => this.setState({ editing: true })} type="submit" value="Edit" />}
                 </Header>
-                <div className="centered">
-                    {this.state.editing ? <ItemForm value={this.state.value}
+                <div>
+                    {editing ? <ItemForm value={value}
                         onSelectChange={this.onSelectChange}
                         handleSubmit={this.handleSubmit}
                         handleChange={this.handleChange}
                         onChangeImage={this.onChangeImage} />
                         : <ItemView
-                            value={this.state.value}
+                            value={value}
+                            addItemRating={this.addItemRating}
                             addToBasket={this.addToBasket}
                             isCustomer={!user.currentUser.admin}
                             setBasketQuantity={quantity => this.setState({
                                 value: {
-                                    ...this.state.value,
+                                    ...value,
                                     basketQuantity: quantity
                                 }
                             })}
