@@ -3,7 +3,7 @@ import deleteImg from '../resources/images/delete.png'
 import rightImg from '../resources/images/arrow-right.png'
 
 
-export const ListItem = ({ item, index, goToItem, removeItem, isAdmin }) => {
+export const ListItem = ({ item, goToItem, removeItem, isAdmin }) => {
 
     return <div className="itemContainer">
         <div className="header">

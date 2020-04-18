@@ -129,7 +129,7 @@ class ItemCatalog extends React.Component {
                         {items.length > 0 &&
                             < div className="itemsList">
                                 {items.map((item, index) => {
-                                    return <ListItem key={index} isAdmin={user.currentUser.admin} removeItem={this.props.removeItem} item={item} index={index} goToItem={this.goToItem} />
+                                    return <ListItem key={index} isAdmin={user.currentUser.admin} removeItem={this.props.removeItem} item={item} goToItem={this.goToItem} />
                                 })}
                             </div>}
                     </div>
