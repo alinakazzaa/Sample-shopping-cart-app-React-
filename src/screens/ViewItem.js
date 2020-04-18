@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import 'react-tabs/style/react-tabs.css'
 import { updateItem } from '../actions/item'
 import { ItemForm } from '../components/ItemForm'
+import { ItemView } from '../components/ItemView'
 
 class ViewItem extends React.Component {
     constructor(props) {
@@ -12,7 +13,8 @@ class ViewItem extends React.Component {
         this.state = {
             value: {
                 category: 'beauty'
-            }
+            },
+            editing: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,10 +29,10 @@ class ViewItem extends React.Component {
     }
 
     handleSubmit = event => {
-        const { updateItem, history } = this.props
+        const { updateItem } = this.props
         event.preventDefault()
         updateItem(this.state.value)
-        history().goBack()
+        this.setState({ editing: false })
     }
 
     handleChange = event => {
@@ -48,21 +50,31 @@ class ViewItem extends React.Component {
 
 
     render() {
-        console.log(this.state.value)
+        const { user } = this.props
         return (
             < div className="container" >
-                <ItemForm logo={logo} value={this.state.value}
-                    onSelectChange={this.onSelectChange}
-                    handleSubmit={this.handleSubmit}
-                    handleChange={this.handleChange}
-                    onChangeImage={this.onChangeImage} />
+                <div className="pageHeader">
+                    <img src={logo} className="app-logo" alt="logo" />
+                    {!this.state.editing && user.currentUser.admin && < input className="bigBtn"
+                        onClick={() => this.setState({ editing: true })} type="submit" value="Edit" />}
+                </div>
+                <div className="centered">
+                    {this.state.editing ? <ItemForm value={this.state.value}
+                        onSelectChange={this.onSelectChange}
+                        handleSubmit={this.handleSubmit}
+                        handleChange={this.handleChange}
+                        onChangeImage={this.onChangeImage} />
+                        : <ItemView value={this.state.value} />}
+                </div>}
+
             </div >
         )
     }
 }
 
 const mapStateToProps = state => ({
-    item: state.item
+    item: state.item,
+    user: state.user
 })
 
 const mapDispatchToProps = {
