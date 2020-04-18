@@ -1,5 +1,6 @@
 import React from 'react'
 import deleteImg from '../resources/images/delete.png'
+import rightImg from '../resources/images/arrow-right.png'
 
 
 export const ListItem = ({ item, index, goToItem, removeItem, isAdmin }) => {
@@ -22,7 +23,7 @@ export const ListItem = ({ item, index, goToItem, removeItem, isAdmin }) => {
             <p className="title">$ {item.price}</p>
         </div>
         <div className="footer">
-            <button onClick={() => goToItem(item)} className="btn">></button>
+            <button onClick={() => goToItem(item)} className="btn"><img className="iconImg" src={rightImg} /></button>
         </div>
     </div>
 }
