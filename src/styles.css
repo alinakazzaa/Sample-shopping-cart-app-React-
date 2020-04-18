@@ -8,11 +8,19 @@
   .mainBox {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .rightBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
   }
 
   .centered {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-content: center;
     align-items: center;
   }
@@ -20,9 +28,30 @@
 .formContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    justify-content: center;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.centeredForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.itemForm {
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 20px;
 }
 
 .itemsContainer{
@@ -67,7 +96,7 @@
   padding: 20px;
   width: 700px;
   align-self: center;
-  justify-content: space-between;;
+  justify-content: space-between;
 }
 
 .middle {
@@ -135,6 +164,26 @@
     margin: 10px 0 10px 0;
 }
 
+.inputSmall {
+  height: 25px;
+  border: 1px solid #1414ff23;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #0b4b5b;
+  padding: 5px;
+  margin: 10px 0 10px 0;
+}
+
+.ratingComment {
+  width: 250px;
+  border: 1px solid #1414ff23;
+  border-radius: 10px;
+  font-size: 18px;
+  color: #0b4b5b;
+  padding: 5px;
+  margin: 10px 0 10px 0;
+}
+
 .bigBtn {
     background-color: #069cc6;
     font-size: 23px;
@@ -178,10 +227,16 @@
   max-height: 250px;
 }
 
-.imageSmall {
+.imageMedium {
   margin: 20px 0 20px 0;
   max-width: 150px;
   max-height: 170px;
+}
+
+.imageSmall {
+  margin: 10px 0 10px 0;
+  max-width: 90px;
+  max-height: 110px;
 }
 
 .btn {
@@ -245,6 +300,28 @@
   height: 50px;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.basketActions {
+  display: flex;
+  flex-direction: column;
+}
+
+.topRight {
+  display: flex;
+  flex-direction: row;
+}
+
+.basketList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ratingBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
   @media (prefers-reduced-motion: no-preference) {

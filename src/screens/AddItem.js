@@ -1,9 +1,9 @@
 import React from 'react'
-import logo from '../logo.svg'
 import { connect } from 'react-redux'
 import 'react-tabs/style/react-tabs.css'
 import { addItem } from '../actions/item'
 import { ItemForm } from '../components/ItemForm'
+import Header from '../components/Header'
 
 class AddItem extends React.Component {
     constructor(props) {
@@ -36,9 +36,12 @@ class AddItem extends React.Component {
     }
 
     render() {
+        const { user, history } = this.props
         return (
             < div className="container" >
-                <ItemForm logo={logo} value={this.state.value}
+                <Header isCustomer={!user.currentUser.admin} history={history}>
+                </Header>
+                <ItemForm value={this.state.value}
                     onSelectChange={this.onSelectChange}
                     handleSubmit={this.handleSubmit}
                     handleChange={this.handleChange}

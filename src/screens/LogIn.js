@@ -1,10 +1,10 @@
 import React from 'react'
-import logo from '../logo.svg'
 import { getAllUsers, setCurrentUserSuccess } from '../actions/user'
 import { connect } from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import { LoginForm } from '../components/LoginForm'
+import Header from '../components/Header'
 
 class LogIn extends React.Component {
     constructor(props) {
@@ -45,11 +45,12 @@ class LogIn extends React.Component {
     }
 
     render() {
-        console.log(this.props)
+        const { history } = this.props
         return (
             < div className="container" >
-                <div className="formContainer">
-                    <img src={logo} className="app-logo" alt="logo" />
+                <Header isCustomer={null} history={history}>
+                </Header>
+                <div className="centered">
                     <Tabs onSelect={index => this.setState({ index })}>
                         <TabList>
                             <Tab>Customer</Tab>

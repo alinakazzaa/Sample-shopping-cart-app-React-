@@ -2,10 +2,10 @@ import firebase from '../database/firebase.js'
 import { SET_ITEMS_SUCCESS, SET_ITEMS_ERROR, SET_CURRENT_ITEM_SUCCESS, SET_CURRENT_ITEM_ERROR, CLEAR_CURRENT_ITEM, ADD_ITEM, UPDATE_ITEM, REMOVE_ITEM } from '../constants/index.js'
 const db = firebase.database()
 
-export const addItem = value => {
+export const addItem = item => {
     return dispatch => {
         db.ref('/Items').push({
-            ...value
+            ...item
         }).then(data => {
 
             db.ref(`/Items/${data.key}`).update({
@@ -14,7 +14,8 @@ export const addItem = value => {
         })
 
         dispatch({
-            type: ADD_ITEM
+            type: ADD_ITEM,
+            item
         })
     }
 }

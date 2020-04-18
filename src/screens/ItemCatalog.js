@@ -1,11 +1,10 @@
 import React from 'react'
-import logo from '../logo.svg'
 import { logOutUser } from '../actions/user'
 import { getAllItems, setCurrentItemSuccess, removeItem } from '../actions/item'
 import { connect } from 'react-redux'
 import { ListItem } from '../components/ListItem'
 import { SortingView } from '../components/SortingView'
-import logoutImg from '../resources/images/log-out.png'
+import Header from '../components/Header'
 
 
 class ItemCatalog extends React.Component {
@@ -20,6 +19,7 @@ class ItemCatalog extends React.Component {
             }
         }
         this.handleChange = this.handleChange.bind(this)
+        this.goToItem = this.goToItem.bind(this)
     }
 
     componentDidMount() {
@@ -54,10 +54,10 @@ class ItemCatalog extends React.Component {
 
         if (value == true) {
             items = [...this.state.items.sort((a, b) => {
-                let x = name == "title" && a.title.toLowerCase() ||
+                x = name == "title" && a.title.toLowerCase() ||
                     name == "manufacturer" && a.manufacturer.toLowerCase() ||
                     name == "category" && a.category.toLowerCase()
-                let y = name == "title" && b.title.toLowerCase() ||
+                y = name == "title" && b.title.toLowerCase() ||
                     name == "manufacturer" && b.manufacturer.toLowerCase() ||
                     name == "category" && b.category.toLowerCase()
                 if (x < y) { return -1 }
@@ -66,10 +66,10 @@ class ItemCatalog extends React.Component {
             })]
         } else {
             items = [...this.state.items.sort((a, b) => {
-                var x = name == "title" && a.title.toLowerCase() ||
+                x = name == "title" && a.title.toLowerCase() ||
                     name == "manufacturer" && a.manufacturer.toLowerCase() ||
                     name == "category" && a.category.toLowerCase()
-                var y = name == "title" && b.title.toLowerCase() ||
+                y = name == "title" && b.title.toLowerCase() ||
                     name == "manufacturer" && b.manufacturer.toLowerCase() ||
                     name == "category" && b.category.toLowerCase()
                 if (x < y) { return 1 }
@@ -85,20 +85,13 @@ class ItemCatalog extends React.Component {
         })
     }
 
-    logOut = () => {
-        const { user, logOutUser, history, match } = this.props
-        logOutUser(user.currentUser)
-        history().push("/")
-    }
-
     render() {
         const { sorters, items } = this.state
         const { history, item, user } = this.props
-        console.log(this.props)
+
         return (
             < div className="container" >
-                <div className="pageHeader">
-                    <img src={logo} className="app-logo" alt="logo" />
+                <Header isCustomer={!user.currentUser.admin} history={history}>
                     <div className="top">
                         <form onChange={this.handleChange} >
                             <div className="lblDiv"><label className="subTitle">Search</label></div>
@@ -107,8 +100,7 @@ class ItemCatalog extends React.Component {
                         {user.currentUser.admin && <button className="addBtn"
                             onClick={() => history().push('/addItem')}>Add Item</button>}
                     </div>
-                    <button onClick={() => this.logOut()} className="btn"><img className="iconImg" src={logoutImg} /></button>
-                </div>
+                </Header>
                 <div className="sorters">
                     <SortingView setSortOrder={this.setSortOrder} asc={sorters.title.asc} name="title" />
                     <SortingView setSortOrder={this.setSortOrder} asc={sorters.category.asc} name="category" />
@@ -129,7 +121,7 @@ class ItemCatalog extends React.Component {
                         {items.length > 0 &&
                             < div className="itemsList">
                                 {items.map((item, index) => {
-                                    return <ListItem key={index} isAdmin={user.currentUser.admin} removeItem={this.props.removeItem} item={item} index={index} goToItem={this.goToItem} />
+                                    return <ListItem key={index} isAdmin={user.currentUser.admin} removeItem={this.props.removeItem} item={item} goToItem={this.goToItem} />
                                 })}
                             </div>}
                     </div>
