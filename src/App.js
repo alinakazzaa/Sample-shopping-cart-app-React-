@@ -5,6 +5,8 @@ import LogIn from './screens/LogIn'
 import Register from './screens/Register'
 import { createBrowserHistory } from 'history'
 import ItemCatalog from './screens/ItemCatalog'
+import ViewItem from './screens/ViewItem'
+import AddItem from './screens/AddItem'
 const history = createBrowserHistory
 
 class App extends React.Component {
@@ -15,18 +17,14 @@ class App extends React.Component {
       <div>
         <Router history={history()}>
           <Switch>
-            <Route exact path="/" component={LogIn}>
-              <LogIn history={history} />
-            </Route>
-            <Route path="/register">
-              <Register history={history} component={Register} />
-            </Route>
-            <Route path="/catalog">
-              <ItemCatalog history={history} component={ItemCatalog} />
-            </Route>
+            <Route exact path="/" render={props => <LogIn history={history} match={props.match} />} />
+            <Route path="/register" render={props => <Register history={history} match={props.match} />} />
+            <Route path="/catalog" render={props => <ItemCatalog history={history} match={props.match} />} />
+            <Route path="/addItem" render={props => <AddItem history={history} match={props.match} />} />
+            <Route path="/viewItem/:id" render={props => <ViewItem history={history} match={props.match} />} />
           </Switch>
         </Router>
-      </div>
+      </div >
     )
   }
 }
