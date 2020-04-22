@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../logo.svg'
 import '../styles.css'
 import { connect } from 'react-redux'
 import 'react-tabs/style/react-tabs.css'
@@ -7,7 +6,6 @@ import { updateItem } from '../actions/item'
 import { addItemToBasket, updateBasketItem } from '../actions/basket'
 import { ItemForm } from '../components/ItemForm'
 import { ItemView } from '../components/ItemView'
-import Header from '../components/Header'
 
 class ViewItem extends React.Component {
     constructor(props) {
@@ -71,14 +69,9 @@ class ViewItem extends React.Component {
 
     render() {
         const { value, editing } = this.state
-        const { user, history } = this.props
-        console.log(value)
+        const { user } = this.props
         return (
             < div className="container" >
-                <Header isCustomer={!user.currentUser.admin} history={history}>
-                    {!editing && user.currentUser.admin && < input className="bigBtn"
-                        onClick={() => this.setState({ editing: true })} type="submit" value="Edit" />}
-                </Header>
                 <div>
                     {editing ? <ItemForm value={value}
                         onSelectChange={this.onSelectChange}
@@ -98,7 +91,6 @@ class ViewItem extends React.Component {
                             })}
                         />}
                 </div>
-
             </div >
         )
     }
