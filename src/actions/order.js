@@ -1,11 +1,11 @@
 import firebase from '../database/firebase.js'
 import { ADD_ORDER, SET_ORDERS_SUCCESS, SET_ORDERS_ERROR, SET_CURRENT_ORDER_SUCCESS, SET_CURRENT_ORDER_ERROR, CLEAR_CURRENT_ORDER, UPDATE_ORDER, REMOVE_ORDER } from '../constants/index.js'
-import { database } from 'firebase'
-import { updateUser, addOrderToUser } from './user.js'
+import { addOrderToUser } from './user.js'
 const db = firebase.database()
 
 export const addOrder = (order, user) => {
     let newOrder = { ...order, id: '', status: 'pending' }
+
     return dispatch => {
         db.ref('/Orders/').push({
             ...newOrder

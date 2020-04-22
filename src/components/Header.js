@@ -2,6 +2,7 @@ import React from 'react'
 import logo from '../logo.svg'
 import logoutImg from '../resources/images/log-out.png'
 import basketImg from '../resources/images/basket.png'
+import userImg from '../resources/images/user.png'
 import { logOutUser } from '../actions/user'
 import { connect } from 'react-redux'
 
@@ -20,10 +21,15 @@ class Header extends React.Component {
             {children}
             <div className="topRight">
                 {isCustomer &&
-                    <button onClick={() => history().push("/basket")}
+                    <div style={{ display: 'flex', flexDirection: 'row' }}><button onClick={() => history().push("/basket")}
                         className="btn"><img className="iconImg"
-                            src={basketImg} /></button>}
-                <div style={{ marginLeft: 30 }}><button onClick={() => this.logOut()} className="btn"><img className="iconImg" src={logoutImg} /></button></div>
+                            src={basketImg} /></button>
+                        <div style={{ marginLeft: 30 }}><button onClick={() => history().push("/userDetails")} className="btn">
+                            <img height={30} src={userImg} />
+                        </button></div>
+                        <div style={{ marginLeft: 30 }}><button onClick={() => this.logOut()} className="btn"><img className="iconImg" src={logoutImg} /></button></div>
+                    </div>
+                }
             </div>
         </div>)
     }

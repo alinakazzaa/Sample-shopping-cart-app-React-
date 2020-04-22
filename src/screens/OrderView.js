@@ -30,7 +30,7 @@ class OrderView extends React.Component {
 
     handleSubmit = () => {
         const { payment, address, saveAddress, savePayment } = this.state
-        const { user, basket, addOrder } = this.props
+        const { user, basket, addOrder, updateUser } = this.props
         const currect = user.currentUser
         let newOrder = {
             items: [...basket.basketItems.map(item => { return item.id })],
@@ -67,7 +67,7 @@ class OrderView extends React.Component {
         if (event.target.name == "saveAddress") {
             this.setState({ address: { ...this.state.address, [event.target.name]: !this.state.address.saveAddress } })
         } else {
-            this.setState({ payment: { ...this.state.payment, [event.target.name]: event.target.value } })
+            this.setState({ address: { ...this.state.address, [event.target.name]: event.target.value } })
         }
     }
 
@@ -99,7 +99,17 @@ class OrderView extends React.Component {
                 </Header>
                 <div className="centered">
                     <AddressForm value={this.state.address} handleChange={this.handleAddressChange} />
+                    <div style={{ marginTop: 50 }} className="formRow"><label className="subTitle">
+                        Save Address
+            </label>
+                        <input name="saveAddress" type="checkbox" style={{ height: 30, width: 30 }} onChange={this.handleAddressChange} checked={this.state.saveAddress} />
+                    </div>
                     <PaymentForm onSelectChange={this.onSelectChange} value={this.state.payment} handleChange={this.handlePaymentChange} />
+                    <div style={{ marginTop: 50 }} className="formRow"><label className="subTitle">
+                        Save Payment Details
+                    </label>
+                        <input name="savePayment" type="checkbox" style={{ height: 30, width: 30 }} onChange={this.handlePaymentChange} checked={this.state.savePayment} />
+                    </div>
                 </div>
                 <div className="centered"><input className="bigBtn" type="submit" value="Pay" onClick={this.handleSubmit} /><p className="title">Total $ {basket.basketTotal}</p></div>
             </div >)
@@ -113,7 +123,8 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = {
-    addOrder
+    addOrder,
+    updateUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderView)

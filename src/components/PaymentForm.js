@@ -54,11 +54,6 @@ export const PaymentForm = ({ value, onSelectChange, handleChange }) => {
                 CCV
             </label>
                 <input value={value.ccv || null} className="input" type="text" name="ccv" /></div>
-            <div style={{ marginTop: 50 }} className="formRow"><label className="subTitle">
-                Save Payment Details
-            </label>
-                <input name="savePayment" type="checkbox" style={{ height: 30, width: 30 }} onChange={handleChange} checked={value.savePayment} />
-            </div>
         </form>
     </div >
 }

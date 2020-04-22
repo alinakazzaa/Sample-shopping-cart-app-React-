@@ -9,6 +9,7 @@ import ViewItem from './screens/ViewItem'
 import AddItem from './screens/AddItem'
 import BasketView from './screens/BasketView'
 import OrderView from './screens/OrderView'
+import UserDetails from './screens/UserDetails'
 
 
 const history = createBrowserHistory
@@ -28,6 +29,7 @@ class App extends React.Component {
             <Route path="/viewItem/:id" render={props => <ViewItem history={history} match={props.match} />} />
             <Route path="/basket" render={props => <BasketView history={history} match={props.match} />} />
             <Route path="/order" render={props => <OrderView history={history} match={props.match} />} />
+            <Route path="/userDetails" render={props => <UserDetails history={history} match={props.match} />} />
           </Switch>
         </Router>
       </div >

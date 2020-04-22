@@ -82,13 +82,15 @@ export const logOutUser = () => {
 }
 
 export const updateUser = user => {
-    db.ref(`/Users/${user.id}`).update({
-        ...user
-    })
+    return dispatch => {
+        db.ref(`/Users/${user.id}`).update({
+            ...user
+        })
 
-    return {
-        type: UPDATE_USER,
-        user
+        dispatch({
+            type: UPDATE_USER,
+            user
+        })
     }
 }
 

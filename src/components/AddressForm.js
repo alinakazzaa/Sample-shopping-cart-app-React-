@@ -30,11 +30,6 @@ export const AddressForm = ({ value, handleChange }) => {
                 Country
             </label>
                 <input value={value.country || null} className="input" type="text" name="country" /></div>
-            <div style={{ marginTop: 50 }} className="formRow"><label className="subTitle">
-                Save Address
-            </label>
-                <input name="saveAddress" type="checkbox" style={{ height: 30, width: 30 }} onChange={handleChange} checked={value.saveAddress} />
-            </div>
         </form>
     </div >
 }
