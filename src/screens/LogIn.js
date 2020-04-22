@@ -33,7 +33,11 @@ class LogIn extends React.Component {
         if (found) {
             if (this.state.value.password === found.password) {
                 setCurrentUserSuccess(found)
-                history().push("/catalog")
+                // factory method
+                if (found.admin)
+                    history().push("/admin")
+                else
+                    history().push("/customer")
             }
         }
     }
@@ -45,11 +49,10 @@ class LogIn extends React.Component {
     }
 
     render() {
-        const { history } = this.props
+        const { match } = this.props
         return (
             < div className="container" >
-                <Header isCustomer={null} history={history}>
-                </Header>
+                <Header match={match} isCustomer={null} history={null} />
                 <div className="centered">
                     <Tabs onSelect={index => this.setState({ index })}>
                         <TabList>
