@@ -9,7 +9,7 @@ class CustomerScreen extends React.Component {
 
     render() {
         const { history, user, match } = this.props
-
+        console.log(this.props)
         return (
             < div className="container" >
                 <Header match={match} isCustomer={!user.currentUser.admin} history={history}>
@@ -17,7 +17,7 @@ class CustomerScreen extends React.Component {
                         className="btn"><img className="iconImg"
                             src={basketImg} /></button>
                 </Header>
-                <ItemCatalog path={match.path} history={history} />
+                <ItemCatalog match={match} history={history} />
             </div >
         )
     }

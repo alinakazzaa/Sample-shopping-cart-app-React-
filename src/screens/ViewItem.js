@@ -69,29 +69,28 @@ class ViewItem extends React.Component {
 
     render() {
         const { value, editing } = this.state
-        const { user } = this.props
+        const { user, match } = this.props
+
         return (
-            < div className="container" >
-                <div>
-                    {editing ? <ItemForm value={value}
-                        onSelectChange={this.onSelectChange}
-                        handleSubmit={this.handleSubmit}
-                        handleChange={this.handleChange}
-                        onChangeImage={this.onChangeImage} />
-                        : <ItemView
-                            value={value}
-                            addItemRating={this.addItemRating}
-                            addToBasket={this.addToBasket}
-                            isCustomer={!user.currentUser.admin}
-                            setBasketQuantity={quantity => this.setState({
-                                value: {
-                                    ...value,
-                                    basketQuantity: quantity
-                                }
-                            })}
-                        />}
-                </div>
-            </div >
+            <div>
+                {editing ? <ItemForm value={value}
+                    onSelectChange={this.onSelectChange}
+                    handleSubmit={this.handleSubmit}
+                    handleChange={this.handleChange}
+                    onChangeImage={this.onChangeImage} />
+                    : <ItemView
+                        value={value}
+                        addItemRating={this.addItemRating}
+                        addToBasket={this.addToBasket}
+                        isCustomer={!user.currentUser.admin}
+                        setBasketQuantity={quantity => this.setState({
+                            value: {
+                                ...value,
+                                basketQuantity: quantity
+                            }
+                        })}
+                    />}
+            </div>
         )
     }
 }

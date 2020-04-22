@@ -2,9 +2,9 @@ import React from 'react'
 import { logOutUser } from '../actions/user'
 import { getAllItems, setCurrentItemSuccess, removeItem } from '../actions/item'
 import { connect } from 'react-redux'
-import { ListItem } from '../components/ListItem'
 import { SortingView } from '../components/SortingView'
-import Header from '../components/Header'
+import { ItemList } from '../components/ItemList'
+import ViewItem from './ViewItem'
 
 
 class ItemCatalog extends React.Component {
@@ -18,7 +18,7 @@ class ItemCatalog extends React.Component {
                 manufacturer: { asc: null },
             }
         }
-        this.handleChange = this.handleChange.bind(this)
+
         this.goToItem = this.goToItem.bind(this)
     }
 
@@ -29,7 +29,7 @@ class ItemCatalog extends React.Component {
             this.setState({ items: item.allItems })
     }
 
-    handleChange = event => {
+    searchItems = event => {
         event.preventDefault()
         const value = event.target.value
         const { item } = this.props
@@ -43,9 +43,10 @@ class ItemCatalog extends React.Component {
     }
 
     goToItem = item => {
-        const { history, setCurrentItemSuccess } = this.props
+        const { history, setCurrentItemSuccess, user } = this.props
         setCurrentItemSuccess(item)
-        history().push(`/viewItem/${item.id}`)
+        const userType = user.currentUser.admin ? "admin" : "customer"
+        history().push(`${userType}/viewItem/${item.id}`)
     }
 
     setSortOrder = (name, value) => {
@@ -87,45 +88,34 @@ class ItemCatalog extends React.Component {
 
     render() {
         const { sorters, items } = this.state
-        const { history, item, user } = this.props
-
+        const { item, user, match } = this.props
+        const path = user.currentUser.admin ? "/admin" : "/customer"
         return (
-            < div className="container" >
-                <Header isCustomer={!user.currentUser.admin} history={history}>
+            < div className="container">
+                {match.path == path && <div>
                     <div className="top">
-                        <form onChange={this.handleChange} >
+                        <form onChange={this.searchItems} >
                             <div className="lblDiv"><label className="subTitle">Search</label></div>
                             <input className="input" type="text" name="searchVal" />
                         </form>
-                        {user.currentUser.admin && <button className="addBtn"
-                            onClick={() => history().push('/addItem')}>Add Item</button>}
                     </div>
-                </Header>
-                <div className="sorters">
-                    <SortingView setSortOrder={this.setSortOrder} asc={sorters.title.asc} name="title" />
-                    <SortingView setSortOrder={this.setSortOrder} asc={sorters.category.asc} name="category" />
-                    <SortingView setSortOrder={this.setSortOrder} asc={sorters.manufacturer.asc} name="manufacturer" />
-                    <button onClick={() =>
-                        this.setState({
-                            items: [...item.allItems], sorters:
-                            {
-                                title: { asc: null },
-                                category: { asc: null },
-                                manufacturer: { asc: null },
-                            }
-                        })} className="btn">Clear Filters</button>
-                </div>
-                <div className="itemsContainer">
-                    <div className="middle">
-                        {item.allItems.length == 0 && <div className="centered"><p className="blueText">No Items yet</p></div>}
-                        {items.length > 0 &&
-                            < div className="itemsList">
-                                {items.map((item, index) => {
-                                    return <ListItem key={index} isAdmin={user.currentUser.admin} removeItem={this.props.removeItem} item={item} goToItem={this.goToItem} />
-                                })}
-                            </div>}
-                    </div>
-                </div>
+                    <div className="sorters">
+                        <SortingView setSortOrder={this.setSortOrder} asc={sorters.title.asc} name="title" />
+                        <SortingView setSortOrder={this.setSortOrder} asc={sorters.category.asc} name="category" />
+                        <SortingView setSortOrder={this.setSortOrder} asc={sorters.manufacturer.asc} name="manufacturer" />
+                        <button onClick={() =>
+                            this.setState({
+                                items: [...item.allItems], sorters:
+                                {
+                                    title: { asc: null },
+                                    category: { asc: null },
+                                    manufacturer: { asc: null },
+                                }
+                            })} className="btn">Clear Filters</button>
+                    </div> </div>}
+                {match.path == "/:userType/viewItem/:id" ? <ViewItem /> :
+                    <ItemList items={items} isAdmin={user.currentUser.admin}
+                        removeItem={this.props.removeItem} goToItem={this.goToItem} />}
             </div >
         )
     }
