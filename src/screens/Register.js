@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../logo.svg'
 import { addUser, setCurrentUserSuccess } from '../actions/user'
 import { connect } from 'react-redux'
 import Header from '../components/Header'
@@ -9,7 +8,8 @@ class Register extends React.Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            admin: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -21,7 +21,7 @@ class Register extends React.Component {
         const { addUser, history } = this.props
         let userValue = { ...this.state }
         addUser(userValue)
-        history().push("/catalog")
+        history().push("/customer")
     }
 
     handleChange = event => {
