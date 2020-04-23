@@ -28,7 +28,10 @@ class LogIn extends React.Component {
     handleSubmit = event => {
         event.preventDefault()
         const { user, setCurrentUserSuccess, history } = this.props
-        const found = user.allUsers.find(u => u.username === this.state.value.username)
+        let found
+
+        if (!user.error && user.allUsers.length > 0)
+            found = user.allUsers.find(u => u.username === this.state.value.username)
 
         if (found) {
             if (this.state.value.password === found.password) {
