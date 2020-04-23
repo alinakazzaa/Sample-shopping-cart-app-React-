@@ -9,7 +9,7 @@ class CustomerScreen extends React.Component {
 
     render() {
         const { history, user, match } = this.props
-        console.log(this.props)
+
         return (
             < div className="container" >
                 <Header match={match} isCustomer={!user.currentUser.admin} history={history}>
