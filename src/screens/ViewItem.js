@@ -1,4 +1,5 @@
 import React from 'react'
+import logo from '../logo.svg'
 import '../styles.css'
 import { connect } from 'react-redux'
 import 'react-tabs/style/react-tabs.css'
@@ -6,6 +7,7 @@ import { updateItem } from '../actions/item'
 import { addItemToBasket, updateBasketItem } from '../actions/basket'
 import { ItemForm } from '../components/ItemForm'
 import { ItemView } from '../components/ItemView'
+import Header from '../components/Header'
 
 class ViewItem extends React.Component {
     constructor(props) {
@@ -69,28 +71,33 @@ class ViewItem extends React.Component {
 
     render() {
         const { value, editing } = this.state
-        const { user, match } = this.props
+        const { user, history } = this.props
 
         return (
-            <div>
-                {editing ? <ItemForm value={value}
-                    onSelectChange={this.onSelectChange}
-                    handleSubmit={this.handleSubmit}
-                    handleChange={this.handleChange}
-                    onChangeImage={this.onChangeImage} />
-                    : <ItemView
-                        value={value}
-                        addItemRating={this.addItemRating}
-                        addToBasket={this.addToBasket}
-                        isCustomer={!user.currentUser.admin}
-                        setBasketQuantity={quantity => this.setState({
-                            value: {
-                                ...value,
-                                basketQuantity: quantity
-                            }
-                        })}
-                    />}
-            </div>
+            < div className="container" >
+                {!editing && user.currentUser.admin && < input className="bigBtn"
+                    onClick={() => this.setState({ editing: true })} type="submit" value="Edit" />}
+                <div>
+                    {editing ? <ItemForm value={value}
+                        onSelectChange={this.onSelectChange}
+                        handleSubmit={this.handleSubmit}
+                        handleChange={this.handleChange}
+                        onChangeImage={this.onChangeImage} />
+                        : <ItemView
+                            value={value}
+                            addItemRating={this.addItemRating}
+                            addToBasket={this.addToBasket}
+                            isCustomer={!user.currentUser.admin}
+                            setBasketQuantity={quantity => this.setState({
+                                value: {
+                                    ...value,
+                                    basketQuantity: quantity
+                                }
+                            })}
+                        />}
+                </div>
+
+            </div >
         )
     }
 }
