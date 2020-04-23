@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Header from '../components/Header'
-import { updateUser } from '../actions/user'
-import { addOrder } from '../actions/order'
-import { updateItem } from '../actions/item'
-import { PaymentForm } from '../components/PaymentForm'
-import { AddressForm } from '../components/AddressForm'
-import { DialogModal } from '../components/DialogModal'
+import Header from '../../components/Header'
+import { updateUser } from '../../actions/user'
+import { addOrder } from '../../actions/order'
+import { updateItem } from '../../actions/item'
+import { PaymentForm } from '../../components/PaymentForm'
+import { AddressForm } from '../../components/AddressForm'
+import { DialogModal } from '../../components/DialogModal'
 
 
 class OrderView extends React.Component {
@@ -91,16 +91,16 @@ class OrderView extends React.Component {
     closeModal = () => {
         const { history } = this.props
         this.setState({ dialogClosed: true })
-        history().push("/catalog")
+        history().push("/customer")
     }
 
     render() {
-        const { user, history, basket } = this.props
+        const { user, history, basket, match } = this.props
 
         return (
             <div className="container">
                 <DialogModal isOpen={!this.state.dialogClosed} onOpen={null} onClose={this.closeModal} title="Confirmed!"><p className="title">Order Submitted! Wait for email confirmation</p></DialogModal>
-                <Header isCustomer={!user.currentUser.admin} history={history}>
+                <Header match={match} isCustomer={!user.currentUser.admin} history={history}>
                     <div className="top">
                         <p className="subTitle">Check your details are correct and update them</p>
                     </div>

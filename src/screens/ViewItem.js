@@ -72,13 +72,11 @@ class ViewItem extends React.Component {
     render() {
         const { value, editing } = this.state
         const { user, history } = this.props
-        console.log(value)
+
         return (
             < div className="container" >
-                <Header isCustomer={!user.currentUser.admin} history={history}>
-                    {!editing && user.currentUser.admin && < input className="bigBtn"
-                        onClick={() => this.setState({ editing: true })} type="submit" value="Edit" />}
-                </Header>
+                {!editing && user.currentUser.admin && < input className="bigBtn"
+                    onClick={() => this.setState({ editing: true })} type="submit" value="Edit" />}
                 <div>
                     {editing ? <ItemForm value={value}
                         onSelectChange={this.onSelectChange}

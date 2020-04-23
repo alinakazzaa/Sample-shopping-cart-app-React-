@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import 'react-tabs/style/react-tabs.css'
-import { addItem } from '../actions/item'
-import { ItemForm } from '../components/ItemForm'
-import Header from '../components/Header'
+import { addItem } from '../../actions/item'
+import { ItemForm } from '../../components/ItemForm'
+import Header from '../../components/Header'
 
 class AddItem extends React.Component {
     constructor(props) {

@@ -1,18 +1,9 @@
 import React from 'react'
-import { BasketItem } from '../components/BasketItem'
+import { BasketItem } from '../../components/BasketItem'
 import { connect } from 'react-redux'
-import Header from '../components/Header'
-import { updateBasketItem, removeBasketItem } from '../actions/basket'
-import { setCurrentItemSuccess } from '../actions/item'
-
-/**
- * 
- * The customer should be able to select items to purchase and add to a shopping cart, with the purchase being processed
- *  by the system and stock levels being updated to reflect the results of the purchase. Features such as discounting and
- *  loyalty cards for customers may be applied in specific circumstances as decided by the developer. Customers should be
- *  able to interactively rate the item on a scale of 1-5 and to leave comments/reviews of an item.
- */
-
+import Header from '../../components/Header'
+import { updateBasketItem, removeBasketItem } from '../../actions/basket'
+import { setCurrentItemSuccess } from '../../actions/item'
 
 class BasketView extends React.Component {
     constructor(props) {
@@ -39,20 +30,20 @@ class BasketView extends React.Component {
     goToItem = item => {
         const { history, setCurrentItemSuccess } = this.props
         setCurrentItemSuccess(item)
-        history().push(`/viewItem/${item.id}`)
+        history().push(`customer/viewItem/${item.id}`)
     }
 
     completePurchase = () => {
         const { history } = this.props
-        history().push("/order")
+        history().push("/customer/order")
     }
 
     render() {
-        const { basket, user, history } = this.props
+        const { basket, user, history, match } = this.props
 
         return (
             <div className="container">
-                <Header isCustomer={!user.currentUser.admin} history={history}>
+                <Header isCustomer={!user.currentUser.admin} match={match} history={history}>
                     <div className="top">
                         <p className="title">Your Basket</p>
                     </div>

@@ -28,12 +28,19 @@ class LogIn extends React.Component {
     handleSubmit = event => {
         event.preventDefault()
         const { user, setCurrentUserSuccess, history } = this.props
-        const found = user.allUsers.find(u => u.username === this.state.value.username)
+        let found
+
+        if (!user.error && user.allUsers.length > 0)
+            found = user.allUsers.find(u => u.username === this.state.value.username)
 
         if (found) {
             if (this.state.value.password === found.password) {
                 setCurrentUserSuccess(found)
-                history().push("/catalog")
+                // factory method
+                if (found.admin)
+                    history().push("/admin")
+                else
+                    history().push("/customer")
             }
         }
     }
@@ -45,11 +52,10 @@ class LogIn extends React.Component {
     }
 
     render() {
-        const { history } = this.props
+        const { match } = this.props
         return (
             < div className="container" >
-                <Header isCustomer={null} history={history}>
-                </Header>
+                <Header match={match} isCustomer={null} history={null} />
                 <div className="centered">
                     <Tabs onSelect={index => this.setState({ index })}>
                         <TabList>

@@ -14,11 +14,6 @@ export const addUser = user => {
             })
 
             dispatch(setCurrentUserSuccess({ ...user, id: data.key }))
-
-            dispatch({
-                type: ADD_USER,
-                user: { ...user, id: data.key }
-            })
         })
     }
 }
