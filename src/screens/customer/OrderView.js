@@ -75,7 +75,7 @@ class OrderView extends React.Component {
         if (event.target.name == "saveAddress") {
             this.setState({ address: { ...this.state.address, [event.target.name]: !this.state.address.saveAddress } })
         } else {
-            this.setState({ payment: { ...this.state.payment, [event.target.name]: event.target.value } })
+            this.setState({ address: { ...this.state.payment, [event.target.name]: event.target.value } })
         }
     }
 
