@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../logo.svg'
 import '../styles.css'
 import { connect } from 'react-redux'
 import 'react-tabs/style/react-tabs.css'
@@ -8,6 +7,7 @@ import { addItemToBasket, updateBasketItem } from '../actions/basket'
 import { ItemForm } from '../components/ItemForm'
 import { ItemView } from '../components/ItemView'
 import Header from '../components/Header'
+import { ItemRatingForm } from '../components/ItemRatingForm'
 
 class ViewItem extends React.Component {
     constructor(props) {
@@ -17,7 +17,8 @@ class ViewItem extends React.Component {
                 category: 'beauty',
                 basketQuantity: 1
             },
-            editing: false
+            editing: false,
+            newRating: { star: 0 }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -62,17 +63,27 @@ class ViewItem extends React.Component {
     }
 
     addItemRating = rating => {
-        const { updateItem, item } = this.props
-        const ratings = [...item.currentItem.ratings] || []
-        ratings.push(rating)
-        updateItem({ ...item.currentItem, ratings })
+        console.log(rating)
+        // const { updateItem, item } = this.props
+        // const ratings = [...item.currentItem.ratings] || []
+        // ratings.push(rating)
+        // updateItem({ ...item.currentItem, ratings })ratingItem
+    }
+
+    handleRatingChange = value => {
+        let name = "comment"
+
+        if (value.instanceof(Number))
+            name = "star"
+        console.log({ ...this.state.newRating, [name]: value })
+        // this.setState({ ...this.state.newRating, [name]: value })
     }
 
 
     render() {
-        const { value, editing } = this.state
+        const { value, editing, newRating } = this.state
         const { user, history } = this.props
-        console.log(value)
+        console.log(newRating)
         return (
             < div className="container" >
                 <Header isCustomer={!user.currentUser.admin} history={history}>
@@ -87,7 +98,6 @@ class ViewItem extends React.Component {
                         onChangeImage={this.onChangeImage} />
                         : <ItemView
                             value={value}
-                            addItemRating={this.addItemRating}
                             addToBasket={this.addToBasket}
                             isCustomer={!user.currentUser.admin}
                             setBasketQuantity={quantity => this.setState({
@@ -97,6 +107,9 @@ class ViewItem extends React.Component {
                                 }
                             })}
                         />}
+                    {!user.currentUser.admin && <div>
+                        <ItemRatingForm handleRatingChange={this.handleRatingChange} star={newRating.star} />
+                    </div>}
                 </div>
 
             </div >

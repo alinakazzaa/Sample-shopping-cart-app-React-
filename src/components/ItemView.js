@@ -1,8 +1,7 @@
 import React from 'react'
 import { quantities } from '../constants/quantities'
-import { ItemRatingForm } from '../components/ItemRatingForm'
 
-export const ItemView = ({ value, addToBasket, isCustomer, setBasketQuantity, addItemRating }) => {
+export const ItemView = ({ value, addToBasket, isCustomer, setBasketQuantity }) => {
 
     return <div className="mainBox">
         <div className="topRight">
@@ -44,15 +43,12 @@ export const ItemView = ({ value, addToBasket, isCustomer, setBasketQuantity, ad
         {isCustomer && <div className="rightBox"><div className="basketActions">
             <select name="basketQuantity" className="input" value={value.basketQuantity || quantities[0]}
                 onChange={selected => setBasketQuantity(selected.target.value)}>
-                {quantities.map(quantity => {
-                    return <option value={quantity}>{quantity}</option>
+                {quantities.map((quantity, index) => {
+                    return <option key={index} value={quantity}>{quantity}</option>
                 })}
             </select>
             <input className="bigBtn" type="submit" value="Add To Basket" onClick={() => addToBasket(value)} />
         </div>
-            <div>
-                <ItemRatingForm addItemRating={addItemRating} />
-            </div>
         </div>}
     </div >
 }
