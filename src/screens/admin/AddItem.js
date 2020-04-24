@@ -39,8 +39,6 @@ class AddItem extends React.Component {
         const { user, history } = this.props
         return (
             < div className="container" >
-                <Header isCustomer={!user.currentUser.admin} history={history}>
-                </Header>
                 <ItemForm value={this.state.value}
                     onSelectChange={this.onSelectChange}
                     handleSubmit={this.handleSubmit}

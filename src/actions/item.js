@@ -78,7 +78,8 @@ export const clearCurrentItem = () => {
 export const updateItem = item => {
     return dispatch => {
         db.ref(`/Items/${item.id}`).update({
-            ...item
+            ...item,
+            basketQuantity: null
         })
 
         dispatch({
